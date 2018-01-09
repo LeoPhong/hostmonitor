@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maxium-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>设备监控系统</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+
+        <link rel="icon" href="/img/favicon-l.ico" type="image/x-icon">
+        <link rel="icon" href="shortcut icon icon" href="/img/favicon-l.ico" type="image/x-icon">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+                        <h2>设备监控系统    <small>LeoPhong出品</small></h2>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="btn btn-warning">注销</button>
+                    </form>
+            </div>
+            </div>
+            <div class="row">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div>
+                        <ul class="nav nav-pills nav-justified">
+                            <li class="active"><a href="/monitor/overview">概览</a></li>
+                            <li><a href="#">Router</a></li>
+                            <li class="disabled"><a href="#">Node</a></li>
+                            <li class="disabled"><a href="#">MQ</a></li>
+                            <li><a href="#">LinuxServer</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#router">
+                                Router状态概览
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="router" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>监控项</th>
+                                        <th>状态值</th>
+                                    </tr>
+                                </thead>
+                                <tbody th:object="${router_overview}">
+                                    <tr>
+                                        <td>CPU平均负载</td>
+                                        <td><span th:text="*{cpuLoad}"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>内存使用情况</td>
+                                        <td><span th:text="*{memUsed}"></span>/<span th:text="*{memSum}"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>SWAP使用情况</td>
+                                        <td><span th:text="*{swapUsed}"></span>/<span th:text="*{swapSum}"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>硬盘使用情况</td>
+                                        <td><span th:text="*{diskUsed}"></span>/<span th:text="*{diskSum}"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>网络使用情况</td>
+                                        <td>NULL/NULL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>温度</td>
+                                        <td><span th:text="*{temp}"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-info" th:object="${linux_server_overview}">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#linuxserver">
+                                LinuxServer状态概览
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="linuxserver" class="panel-collapse cpllapse in">
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>监控项</th>
+                                        <th>状态值</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>CPU平均负载</td>
+                                        <td><span th:text="*{cpuLoad}"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>内存使用情况</td>
+                                        <td><span th:text="*{memUsed}"></span>/<span th:text="*{memSum}"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>SWAP使用情况</td>
+                                        <td><span th:text="*{swapUsed}"></span>/<span th:text="*{swapSum}"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>硬盘使用情况</td>
+                                        <td><span th:text="*{diskUsed}"></span>/<span th:text="*{diskSum}"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>网络使用情况</td>
+                                        <td>NULL/NULL</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            $(function () { $('#router').collapse('show')});
+            $(function () {$('#linuxserver').collapse('hide')});
+        </script>
+    </body>
+</html>
