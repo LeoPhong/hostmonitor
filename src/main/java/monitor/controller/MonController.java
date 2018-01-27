@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import monitor.service.NetworkService;
 import monitor.service.OverviewService;;
 
 @Controller
@@ -14,6 +15,8 @@ public class MonController {
 
     @Autowired
     OverviewService overview;
+    @Autowired
+    NetworkService networkService;
 
     @RequestMapping(value = "/overview", method = RequestMethod.GET)
     public String overview(Model model) {

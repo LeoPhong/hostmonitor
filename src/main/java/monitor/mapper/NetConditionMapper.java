@@ -3,6 +3,7 @@ package monitor.mapper;
 import java.sql.Timestamp;
 import java.util.List;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -20,7 +21,7 @@ public interface NetConditionMapper {
     })
     List<NetConditionEntity>getAll();
 
-    @Select("SELECT * FROM net_condition WHERE id=#{id}")
+    @Select("SELECT * FROM net_condition WHERE id=#{id} and device=#{device} ORDER BY time LIMIT 2")
     @Results({
         @Result(property="curTime", column="time", javaType=Timestamp.class),
         @Result(property="id",column="id", javaType=Integer.class),
@@ -28,9 +29,9 @@ public interface NetConditionMapper {
         @Result(property="rxBytes", column="rxbytes", javaType=Long.class),
         @Result(property="txBytes", column="txbytes", javaType=Long.class),
     })
-    NetConditionEntity getOneById(int id);
+    List<NetConditionEntity>getLastTwoById(@Param("id")int id, @Param("device") String device);
 
-    @Select("SELECT * FROM net_condition WHERE time=#{curTime}")
+    @Select("SELECT * FROM (SELECT * FROM  net_condition WHERE id=#{id} AND device=#{device} AND time>#{startTime} ORDER BY RAND() LIMIT 1000) AS temp_table ORDER BY time")
     @Results({
         @Result(property="curTime", column="time", javaType=Timestamp.class),
         @Result(property="id",column="id", javaType=Integer.class),
@@ -38,7 +39,7 @@ public interface NetConditionMapper {
         @Result(property="rxBytes", column="rxbytes", javaType=Long.class),
         @Result(property="txBytes", column="txbytes", javaType=Long.class),
     })
-    NetConditionEntity getOneByTime(Timestamp curTime);
+    List<NetConditionEntity>getByDuringTime(@Param("startTime") Timestamp startTime, @Param("id") int id, @Param("device") String device);
 
     @Insert("INSERT INTO net_condition VALUES(#{curTime}, #{id}, #{device}, #{rxBytes}, #{txBytes})")
     void insert(NetConditionEntity netConditionEntity);
