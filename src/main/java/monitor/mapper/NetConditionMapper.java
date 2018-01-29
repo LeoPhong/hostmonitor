@@ -21,7 +21,7 @@ public interface NetConditionMapper {
     })
     List<NetConditionEntity>getAll();
 
-    @Select("SELECT * FROM net_condition WHERE id=#{id} and device=#{device} ORDER BY time LIMIT 2")
+    @Select("SELECT * FROM (SELECT * FROM net_condition WHERE id=#{id} and device=#{device} ORDER BY time DESC LIMIT 2) AS temp_table ORDER BY TIME")
     @Results({
         @Result(property="curTime", column="time", javaType=Timestamp.class),
         @Result(property="id",column="id", javaType=Integer.class),
