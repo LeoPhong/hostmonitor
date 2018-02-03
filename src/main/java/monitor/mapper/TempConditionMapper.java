@@ -34,7 +34,7 @@ public interface TempConditionMapper {
         @Result(property="id",column="id", javaType=Integer.class),
         @Result(property="temp", column="temp", javaType=Double.class)
     })
-    List<TempConditionEntity> getDuringTime(@Param("id")int id, @Param("startTime")Timestamp startTime);
+    List<TempConditionEntity> getByDuringTime(@Param("id")int id, @Param("startTime")Timestamp startTime);
 
     @Insert("INSERT INTO temp_condition VALUES(#{curTime}, #{id}, #{temp})")
     void insert(TempConditionEntity TempConditionEntity);

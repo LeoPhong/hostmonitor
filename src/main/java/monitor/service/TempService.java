@@ -32,7 +32,7 @@ public class TempService {
         }
         else {
             Timestamp start_time = new Timestamp(System.currentTimeMillis() - duringMin*60*1000);
-            List<TempConditionEntity> temp_entity_list = tempConditionMapper.getDuringTime(server_id, start_time);
+            List<TempConditionEntity> temp_entity_list = tempConditionMapper.getByDuringTime(server_id, start_time);
             for(int index = 0; index < temp_entity_list.size(); index ++) {
                 Timestamp time_point = temp_entity_list.get(index).getCurTime();
                 double temp = temp_entity_list.get(index).getTemp();
