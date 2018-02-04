@@ -7,5 +7,5 @@ ENV JAVA_HOME /usr/lib/jvm/default-jvm
 ENV PATH ${PATH}:${JAVA_HOME}/bin
 # Set environment for jre time zone
 ENV TZ="Asia/Shanghai"
-ADD ./target/hostmonitor-0.1.4.jar hostmonitor.jar
+ADD ./target/hostmonitor-0.1.5.jar hostmonitor.jar
 ENTRYPOINT ["java", "-jar", "/hostmonitor.jar"]
