@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import monitor.service.OverviewService;;
+import monitor.service.OverviewService;
 
 @Controller
 @RequestMapping(value = "/monitor")

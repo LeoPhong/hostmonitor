@@ -48,7 +48,7 @@ public class MemConditionJob {
 
     private static long[] getMemCondition(SshCommandExecutor ssh_command_executor) {
         long[] mem_condition = new long[] { 0L, 0L, 0L, 0L };
-        String[] free_result = ssh_command_executor.executeCmd("free").split("\n");
+        String[] free_result = ssh_command_executor.executeCmd("free -b").split("\n");
         mem_condition[0] = Long.parseLong(StringOperator.removeSpace(free_result[1]).split(" ")[2]);
         mem_condition[1] = Long.parseLong(StringOperator.removeSpace(free_result[1]).split(" ")[1]);
         mem_condition[2] = Long.parseLong(StringOperator.removeSpace(free_result[2]).split(" ")[2]);
