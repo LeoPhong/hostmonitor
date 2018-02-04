@@ -93,4 +93,28 @@ public class MemService {
         }
         return swap_sum;
     }
+
+    public long getMemUsed(String hostname) {
+        HashMap<Timestamp, Long> last_mem_used = getMemUsed(hostname, 0);
+        Timestamp time_point = last_mem_used.keySet().iterator().next();
+        return last_mem_used.get(time_point);
+    }
+
+    public long getMemSum(String hostname) {
+        HashMap<Timestamp, Long>last_mem_sum = getMemSum(hostname, 0);
+        Timestamp time_point = last_mem_sum.keySet().iterator().next();
+        return last_mem_sum.get(time_point);
+    }
+
+    public long getSwapUsed(String hostname) {
+        HashMap<Timestamp, Long> last_swap_used = getSwapUsed(hostname, 0);
+        Timestamp time_point = last_swap_used.keySet().iterator().next();
+        return last_swap_used.get(time_point);
+    }
+
+    public long getSwapSum(String hostname) {
+        HashMap<Timestamp, Long> last_swap_sum = getSwapSum(hostname, 0);
+        Timestamp time_point = last_swap_sum.keySet().iterator().next();
+        return last_swap_sum.get(time_point);
+    }
 }

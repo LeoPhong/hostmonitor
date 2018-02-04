@@ -78,6 +78,18 @@ public class NetworkService {
         return tx_speed_cluster;
     }
 
+    public double getLastRxSpeed(String hostname, String devicename) {
+        HashMap<Timestamp, Double> last_rx_speed = getRxSpeed(hostname, devicename, 0);
+        Timestamp time_point = last_rx_speed.keySet().iterator().next();
+        return last_rx_speed.get(time_point);
+    }
+
+    public double getLastTxSpeed(String hostname, String devicename){
+        HashMap<Timestamp, Double>last_tx_speed = getTxSpeed(hostname, devicename, 0);
+        Timestamp time_point = last_tx_speed.keySet().iterator().next();
+        return last_tx_speed.get(time_point);
+    }
+
     private double calSpeed(Timestamp time1,long sum1, Timestamp time2, long sum2) {
         if(sum2<sum1) {
             return 0.0f;

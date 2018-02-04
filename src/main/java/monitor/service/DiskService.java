@@ -21,7 +21,7 @@ public class DiskService {
         this.diskConditionMapper = diskConditionMapper;
     }
 
-    public HashMap<Timestamp, Long>getDiskUsed(String hostname, String type, long duringMin) {
+    public HashMap<Timestamp, Long>getDiskUsed(String hostname, long duringMin) {
         HashMap<Timestamp, Long> disk_used = new HashMap<Timestamp, Long>();
         int server_id = infoMapper.getByName(hostname).getId();
         if(duringMin == 0) {
@@ -40,7 +40,7 @@ public class DiskService {
         return disk_used;
     }
 
-    public HashMap<Timestamp, Long>getDiskSum(String hostname, String type, long duringMin) {
+    public HashMap<Timestamp, Long>getDiskSum(String hostname, long duringMin) {
         HashMap<Timestamp, Long>disk_sum = new HashMap<Timestamp, Long>();
         int server_id = infoMapper.getByName(hostname).getId();
         if(duringMin == 0) {
@@ -57,5 +57,17 @@ public class DiskService {
             }
         }
         return disk_sum;
+    }
+
+    public long getLastDiskUsed(String hostname) {
+        HashMap<Timestamp, Long> last_disk_used = getDiskUsed(hostname, 0);
+        Timestamp time_point = last_disk_used.keySet().iterator().next();
+        return last_disk_used.get(time_point);
+    }
+
+    public long getLastDiskSum(String hostname) {
+        HashMap<Timestamp, Long> last_disk_sum = getDiskSum(hostname, 0);
+        Timestamp time_point = last_disk_sum.keySet().iterator().next();
+        return last_disk_sum.get(time_point);
     }
 }

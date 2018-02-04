@@ -43,4 +43,10 @@ public class TempService {
         }
         return temp_status;
     }
+
+    public double getLastTemp(String hostname) {
+        HashMap<Timestamp, Double>last_temp = getTemp(hostname, 0);
+        Timestamp time_point = last_temp.keySet().iterator().next();
+        return last_temp.get(time_point);
+    }
 }

@@ -40,4 +40,10 @@ public class CpuService {
         }
         return cpu_load;
     }
+
+    public double getLastCpuLoad(String hostname) {
+        HashMap<Timestamp, Double> last_cpu_load = getCpuLoad(hostname, 0);
+        Timestamp time_point = last_cpu_load.keySet().iterator().next();
+        return last_cpu_load.get(time_point);
+    }
 }
