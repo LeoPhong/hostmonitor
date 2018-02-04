@@ -42,7 +42,6 @@ public class MemConditionJob {
             }
             memConditionMapper.insert(new MemConditionEntity(cur_time, server_id, mem_condition[0], mem_condition[1],
                     mem_condition[2], mem_condition[3]));
-
         }
     }
 

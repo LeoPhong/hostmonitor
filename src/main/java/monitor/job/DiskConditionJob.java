@@ -57,8 +57,8 @@ public class DiskConditionJob {
                 sum_KB = Long.parseLong(StringOperator.removeSpace(line).split(" ")[1]);
             }
         }
-        disk_info[0] = used_KB;
-        disk_info[1] = sum_KB;
+        disk_info[0] = used_KB*1024;        //以字节为单位存储
+        disk_info[1] = sum_KB*1024;         //以字节为单位存储
         return disk_info;
     }
 }
