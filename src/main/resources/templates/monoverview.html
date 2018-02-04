@@ -38,6 +38,7 @@
             </div>
 
             <div class="panel-group" id="accordion">
+                <!--
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -85,7 +86,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-info" th:object="${linux_server_overview}">
+            -->
+                <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#linuxserver">
@@ -105,23 +107,23 @@
                                 <tbody>
                                     <tr>
                                         <td>CPU平均负载</td>
-                                        <td><span th:text="*{cpuLoad}"></span></td>
+                                        <td><span th:text="${linux_server_overview.cpuLoad}"></span></td>
                                     </tr>
                                     <tr>
                                         <td>内存使用情况</td>
-                                        <td><span th:text="*{memUsed}"></span>/<span th:text="*{memSum}"></span></td>
+                                        <td><span th:text="${linux_server_overview.memUsed}"></span>/<span th:text="${linux_server_overview.memSum}"></span></td>
                                     </tr>
                                     <tr>
                                         <td>SWAP使用情况</td>
-                                        <td><span th:text="*{swapUsed}"></span>/<span th:text="*{swapSum}"></span></td>
+                                        <td><span th:text="${linux_server_overview.swapUsed}"></span>/<span th:text="${linux_server_overview.swapSum}"></span></td>
                                     </tr>
                                     <tr>
                                         <td>硬盘使用情况</td>
-                                        <td><span th:text="*{diskUsed}"></span>/<span th:text="*{diskSum}"></span></td>
+                                        <td><span th:text="${linux_server_overview.diskUsed}"></span>/<span th:text="${linux_server_overview.diskSum}"></span></td>
                                     </tr>
                                     <tr>
                                         <td>网络使用情况</td>
-                                        <td>NULL/NULL</td>
+                                        <td><span th:text="${linux_server_overview.netSpeed}"></span></td>
                                     </tr>
                                 </tbody>
                             </table>
